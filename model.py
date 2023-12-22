@@ -42,12 +42,12 @@ class GeoGCNLayer(nn.Module):
                 if self.geo_w == 0 and not self.is_att:
                     continue
                 else:
-                    funcs[etype] = (fn.copy_u('f', 'm'), fn.mean('m', 'geo'))
+                    funcs[etype] = (fn.copy_u('f', 'mg'), fn.mean('mg', 'geo'))
             else:
                 if self.tran_w == 0 and not self.is_att:
                     continue
                 else:
-                    funcs[etype] = (fn.u_mul_e('f', 'w', 'm'), fn.sum('m', 'trans'))
+                    funcs[etype] = (fn.u_mul_e('f', 'w', 'mt'), fn.sum('mt', 'trans'))
                     
         self.g.multi_update_all(funcs, 'sum')
         if self.is_att: 
